@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Movimentações de equipamentos</h4>
+
+    <a href="{{ url_for('nova_movimentacao') }}" class="btn btn-primary">
+        Nova movimentação
+    </a>
+</div>
+
+<table class="table table-striped table-bordered table-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Patrimônio</th>
+            <th>Usuário anterior</th>
+            <th>Novo usuário</th>
+            <th>Data</th>
+            <th>Observação</th>
+            <th style="width:120px">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in movimentacoes %}
+        <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.patrimonio }}</td>
+            <td>
+                {{ m.usuario_anterior or '—' }}
+            </td>
+            <td>
+                {{ m.usuario_novo or '—' }}
+            </td>
+            <td>
+                {{ m.data_movimentacao }}
+            </td>
+            <td>
+                {{ m.obs }}
+            </td>
+            <td>
+                <a
+                   class="btn btn-sm btn-outline-secondary"
+                   href="{{ url_for('historico_patrimonio', patrimonio=m.patrimonio) }}">
+                    Histórico
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if movimentacoes|length == 0 %}
+<div class="alert alert-info mt-3">
+    Nenhuma movimentação registrada.
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Novo equipamento</h3>
+
+<form method="post">
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label class="form-label">Patrimônio</label>
+      <input type="text" name="patrimonio" class="form-control" required>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Tipo</label>
+      <input type="text" name="tipo" class="form-control">
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Marca</label>
+      <input type="text" name="marca" class="form-control">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label class="form-label">Modelo</label>
+      <input type="text" name="modelo" class="form-control">
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Número de série</label>
+      <input type="text" name="numero_serie" class="form-control">
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Sistema operacional</label>
+      <input type="text" name="sistema_operacional" class="form-control">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label class="form-label">Memória</label>
+      <input type="text" name="memoria" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Ano da compra</label>
+      <input type="number" name="ano_compra" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Status da máquina</label>
+      <select name="status_maquina" class="form-select">
+        <option value="disponivel">Disponível</option>
+        <option value="alocado">Alocado</option>
+        <option value="manutencao">Em manutenção</option>
+        <option value="descartado">Descartado</option>
+        <option value="roubo">Roubo</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label class="form-label">Observação</label>
+      <textarea name="observacao" class="form-control"></textarea>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Última manutenção preventiva</label>
+      <input type="date" name="ultima_manutencao_preventiva" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Manutenção preventiva programada</label>
+      <input type="date" name="manutencao_preventiva_programada" class="form-control">
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">Salvar</button>
+  <a href="{{ url_for('equipamentos') }}" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+{% endblock %}

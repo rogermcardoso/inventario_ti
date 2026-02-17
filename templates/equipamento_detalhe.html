@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Detalhe do Equipamento</h3>
+
+<div class="card mb-4">
+  <div class="card-body">
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Patrimônio:</strong></div>
+      <div class="col-md-9">{{ e.patrimonio }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Tipo:</strong></div>
+      <div class="col-md-9">{{ e.tipo }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Marca:</strong></div>
+      <div class="col-md-9">{{ e.marca }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Modelo:</strong></div>
+      <div class="col-md-9">{{ e.modelo }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Número de série:</strong></div>
+      <div class="col-md-9">{{ e.numero_serie }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Sistema operacional:</strong></div>
+      <div class="col-md-9">{{ e.sistema_operacional }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Memória:</strong></div>
+      <div class="col-md-9">{{ e.memoria }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Ano da compra:</strong></div>
+      <div class="col-md-9">{{ e.ano_compra }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Status da máquina:</strong></div>
+      <div class="col-md-9">{{ e.status_maquina }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Usuário atual:</strong></div>
+      <div class="col-md-9">
+        {{ e.usuario_atual if e.usuario_atual else "—" }}
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Última manutenção preventiva:</strong></div>
+      <div class="col-md-9">{{ e.ultima_manutencao_preventiva }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Manutenção preventiva programada:</strong></div>
+      <div class="col-md-9">{{ e.manutencao_preventiva_programada }}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-3"><strong>Observação:</strong></div>
+      <div class="col-md-9">{{ e.observacao }}</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="mb-3">
+
+  <a href="{{ url_for('nova_movimentacao', patrimonio=e.patrimonio) }}"
+     class="btn btn-primary">
+    Movimentar equipamento
+  </a>
+
+  <a href="{{ url_for('historico_patrimonio', patrimonio=e.patrimonio) }}"
+     class="btn btn-outline-secondary">
+    Ver histórico
+  </a>
+
+  <a href="{{ url_for('equipamentos') }}"
+     class="btn btn-secondary">
+    Voltar
+  </a>
+
+</div>
+
+{% endblock %}

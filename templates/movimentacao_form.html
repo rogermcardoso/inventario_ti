@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4 class="mb-3">Nova movimentação de equipamento</h4>
+
+<form method="post">
+
+    <div class="row mb-3">
+
+        <!-- Patrimônio -->
+        <div class="col-md-4">
+            <label class="form-label">Patrimônio</label>
+            <select name="patrimonio" class="form-select" required>
+                <option value="">Selecione...</option>
+                {% for e in equipamentos %}
+                    <option value="{{ e.patrimonio }}">
+                        {{ e.patrimonio }} - {{ e.marca }} {{ e.modelo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Usuário atual (anterior) -->
+        <div class="col-md-4">
+            <label class="form-label">Usuário atual</label>
+            <input
+                type="text"
+                class="form-control"
+                id="usuario_atual"
+                disabled
+                placeholder="Será carregado automaticamente">
+            <input type="hidden" name="usuario_anterior_id" id="usuario_anterior_id">
+        </div>
+
+        <!-- Novo usuário -->
+        <div class="col-md-4">
+            <label class="form-label">Novo usuário</label>
+            <select name="usuario_novo_id" class="form-select" required>
+                <option value="">Selecione...</option>
+                {% for u in usuarios %}
+                    <option value="{{ u.id }}">
+                        {{ u.nome_usuario }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Data da movimentação</label>
+            <input type="date" name="data_movimentacao" class="form-control" required>
+        </div>
+
+        <div class="col-md-8">
+            <label class="form-label">Observações</label>
+            <input type="text" name="obs" class="form-control">
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            Salvar movimentação
+        </button>
+
+        <a href="{{ url_for('movimentacoes') }}" class="btn btn-secondary">
+            Cancelar
+        </a>
+    </div>
+
+</form>
+
+<script>
+document.querySelector('[name="patrimonio"]').addEventListener('change', function(){
+
+    const patrimonio = this.value;
+
+    if(!patrimonio){
+        document.getElementById('usuario_atual').value = '';
+        document.getElementById('usuario_anterior_id').value = '';
+        return;
+    }
+
+    fetch(`/api/usuario_atual/${patrimonio}`)
+        .then(r => r.json())
+        .then(d => {
+
+            if(d && d.id){
+                document.getElementById('usuario_atual').value = d.nome_usuario;
+                document.getElementById('usuario_anterior_id').value = d.id;
+            }else{
+                document.getElementById('usuario_atual').value = 'Sem usuário';
+                document.getElementById('usuario_anterior_id').value = '';
+            }
+
+        });
+});
+</script>
+
+{% endblock %}

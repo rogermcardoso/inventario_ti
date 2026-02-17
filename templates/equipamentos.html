@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Equipamentos</h3>
+
+    <a href="{{ url_for('novo_equipamento') }}" class="btn btn-success">
+        Novo equipamento
+    </a>
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Patrimônio</th>
+            <th>Tipo</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Status</th>
+            <th>Usuário atual</th>
+            <th style="width:220px">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for e in dados %}
+        <tr>
+            <td>{{ e.patrimonio }}</td>
+            <td>{{ e.tipo }}</td>
+            <td>{{ e.marca }}</td>
+            <td>{{ e.modelo }}</td>
+
+            <td class="status-{{ e.status_maquina }}">
+                {{ e.status_maquina }}
+            </td>
+
+            <td>
+                {{ e.usuario_atual if e.usuario_atual else "—" }}
+            </td>
+
+            <td>
+                <a href="{{ url_for('detalhe_equipamento', patrimonio=e.patrimonio) }}"
+                   class="btn btn-sm btn-primary">
+                    Detalhe
+                </a>
+
+                <a href="{{ url_for('nova_movimentacao', patrimonio=e.patrimonio) }}"
+                   class="btn btn-sm btn-warning">
+                    Movimentar
+                </a>
+
+                <a href="{{ url_for('historico_patrimonio', patrimonio=e.patrimonio) }}"
+                   class="btn btn-sm btn-secondary">
+                    Histórico
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+
+    {% if dados|length == 0 %}
+        <tr>
+            <td colspan="7" class="text-center">
+                Nenhum equipamento cadastrado.
+            </td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+</table>
+
+{% endblock %}

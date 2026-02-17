@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Histórico do patrimônio {{ patrimonio }}</h3>
+
+    <a href="{{ url_for('equipamentos') }}" class="btn btn-secondary">
+        Voltar
+    </a>
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Data</th>
+            <th>Tipo de movimentação</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Usuário</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for m in dados %}
+        <tr>
+            <td>{{ m.data_movimentacao }}</td>
+            <td>{{ m.tipo_movimentacao }}</td>
+            <td>{{ m.origem if m.origem else "—" }}</td>
+            <td>{{ m.destino if m.destino else "—" }}</td>
+            <td>{{ m.usuario if m.usuario else "—" }}</td>
+            <td>{{ m.observacao if m.observacao else "—" }}</td>
+        </tr>
+    {% endfor %}
+
+    {% if dados|length == 0 %}
+        <tr>
+            <td colspan="6" class="text-center">
+                Nenhuma movimentação registrada para este patrimônio.
+            </td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4 class="mb-3">
+    {% if usuario %}
+        Editar usuário
+    {% else %}
+        Novo usuário
+    {% endif %}
+</h4>
+
+<form method="post">
+
+    <div class="row mb-3">
+
+        <div class="col-md-6">
+            <label class="form-label">Nome do usuário</label>
+            <input
+                type="text"
+                name="nome_usuario"
+                class="form-control"
+                required
+                value="{{ usuario.nome_usuario if usuario else '' }}">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Cargo</label>
+            <input
+                type="text"
+                name="cargo"
+                class="form-control"
+                value="{{ usuario.cargo if usuario else '' }}">
+        </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-md-6">
+            <label class="form-label">Centro de custo</label>
+            <select name="centro_custo_id" class="form-select" required>
+                <option value="">Selecione...</option>
+                {% for cc in centros_custo %}
+                    <option
+                        value="{{ cc.id }}"
+                        {% if usuario and usuario.centro_custo_id == cc.id %}selected{% endif %}>
+                        {{ cc.codigo }} - {{ cc.nome }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Departamento</label>
+            <select name="departamento_id" class="form-select" required>
+                <option value="">Selecione...</option>
+                {% for d in departamentos %}
+                    <option
+                        value="{{ d.id }}"
+                        {% if usuario and usuario.departamento_id == d.id %}selected{% endif %}>
+                        {{ d.nome }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-md-3">
+            <label class="form-label">Termo assinado</label>
+            <select name="termo_assinado" class="form-select" required>
+                <option value="S"
+                    {% if usuario and usuario.termo_assinado == 'S' %}selected{% endif %}>
+                    Sim
+                </option>
+                <option value="N"
+                    {% if usuario and usuario.termo_assinado == 'N' %}selected{% endif %}>
+                    Não
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+
+        <a href="{{ url_for('usuarios') }}" class="btn btn-secondary">
+            Cancelar
+        </a>
+    </div>
+
+</form>
+
+{% endblock %}
