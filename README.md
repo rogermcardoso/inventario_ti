@@ -80,8 +80,9 @@ inventario_ti/
 - Flask
 
 Instalação do Flask:
-pip install flask
-
+```bash
+$ pip install flask
+```
 
 ---
 
@@ -91,8 +92,9 @@ O banco é criado a partir do schema.
 
 Você pode usar o script de inicialização:
 
-python init_db.py
-
+```bash
+$ python init_db.py
+```
 
 Este script:
 
@@ -103,11 +105,17 @@ Este script:
 
 ## Executando o sistema
 
-python app.py
+
+
+```bash
+$ python app.py
+```
 
 
 Depois acesse:
+```plain
 http://127.0.0.1:5000
+```
 
 
 ---
@@ -177,7 +185,9 @@ http://127.0.0.1:5000
 
 O arquivo:
 
-
+```bash
+sync_ocs.py
+```
 sync_ocs.py
 
 
@@ -217,17 +227,18 @@ A modelagem não precisará ser refeita.
 
 O arquivo de banco:
 
-
+```plain
 inventario_ti.db
-
+```
 
 não deve ser versionado.
 
+```plain
 Use no `.gitignore`:
 
 
 inventario_ti.db
-
+```
 
 ---
 
