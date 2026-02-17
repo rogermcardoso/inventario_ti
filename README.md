@@ -44,6 +44,8 @@ Este projeto foi construído para:
 ---
 
 ## Estrutura do projeto
+
+```plain
 inventario_ti/
 │
 ├── app.py
@@ -68,6 +70,7 @@ inventario_ti/
 │ └── favicon.ico
 │
 └── inventario_ti.db (não versionar)
+```
 
 ---
 
